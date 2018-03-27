@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ChatEdx.iml" filepath="$PROJECT_DIR$/ChatEdx.iml" />
+      <module fileurl="file://C:\Users\NJG_3\.AndroidStudio3.0\ChatEdx\ChatEdx.iml" filepath="C:\Users\NJG_3\.AndroidStudio3.0\ChatEdx\ChatEdx.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\NJG_3\.AndroidStudio3.0\ChatEdx\app\app.iml" filepath="C:\Users\NJG_3\.AndroidStudio3.0\ChatEdx\app\app.iml" />
     </modules>
   </component>
 </project>
