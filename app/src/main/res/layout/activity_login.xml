@@ -4,6 +4,7 @@
     android:id="@+id/layoutMainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".login.ui.LoginActivity">
 
     <android.support.design.widget.TextInputLayout
@@ -13,11 +14,11 @@
         android:layout_above="@+id/wrapperPassword">
 
         <EditText
+            android:id="@+id/editTxtEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:id="@+id/editTxtEmail" />
+            android:inputType="textEmailAddress" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -27,38 +28,38 @@
         android:layout_above="@+id/layoutButtons">
 
         <EditText
+            android:id="@+id/editTxtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Passwoord"
-            android:inputType="textPassword"
-            android:id="@+id/editTxtPassword" />
+            android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
+        android:id="@+id/layoutButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/layoutButtons">
+        android:layout_centerVertical="true">
 
         <Button
+            android:id="@+id/btnSignin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SIGNIN"
-            android:id="@+id/btnSignin" />
+            android:text="SIGNIN" />
 
         <Button
+            android:id="@+id/btnSignup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SIGNUP"
-            android:id="@+id/btnSignup"/>
+            android:text="SIGNUP" />
     </LinearLayout>
 
     <ProgressBar
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
         android:layout_below="@+id/layoutButtons"
         android:layout_centerInParent="true"
         android:visibility="gone" />

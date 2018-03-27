@@ -2,8 +2,15 @@ package com.jaimes.nelson.chatedx.domain;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.jaimes.nelson.chatedx.login.entities.User;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by NJG_3 on 25/03/2018.
@@ -37,7 +44,7 @@ public class FirebaseHelper {
         return getUserReference(getMyUser());
     }
 
-    private String getMyUser() {
+    public String getMyUser() {
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String email = null;
         if (firebaseUser != null) {
@@ -53,5 +60,53 @@ public class FirebaseHelper {
             userReference = databaseReference.getRoot().child(USERS_PATH).child(emailKey);
         }
         return userReference;
+    }
+
+    public DatabaseReference getContactsReference(String email) {
+        return getUserReference(email).child(CONTACTS_PATH);
+    }
+
+    public DatabaseReference getMyContactsReference() {
+        return getContactsReference(getMyUser());
+    }
+
+    public DatabaseReference getOneContactReference(String email, String childEmail) {
+        String childKey = childEmail.replace(".", "_");
+        return getContactsReference(email).child(childKey);
+    }
+
+    private void notifyChangeConnectionAllContacts(final boolean online, final boolean singOff) {
+        final String myEmail = getMyUser();
+        getMyContactsReference().addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot contactSnapshot : dataSnapshot.getChildren()) {
+                    String email = contactSnapshot.getKey();
+                    DatabaseReference contactsReference = getOneContactReference(email, myEmail);
+                    contactsReference.setValue(online);
+                }
+                if (singOff) {
+                    FirebaseAuth.getInstance().signOut();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private void notifyChangeConnectionAllContacts(boolean online) {
+        notifyChangeConnectionAllContacts(online, false);
+    }
+
+    public void changeUserConnectionStatus(boolean online) {
+        DatabaseReference myUserReference = getMyUserReference();
+        if (myUserReference != null) {
+            Map<String, Object> statusMap = new HashMap<>();
+            statusMap.put(TreeHelper.ONLINE, online);
+            myUserReference.updateChildren(statusMap);
+            notifyChangeConnectionAllContacts(User.ONLINE);
+        }
     }
 }

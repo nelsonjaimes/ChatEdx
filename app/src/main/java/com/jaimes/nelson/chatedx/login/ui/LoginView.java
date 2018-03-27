@@ -6,7 +6,7 @@ package com.jaimes.nelson.chatedx.login.ui;
 
 public interface LoginView {
 
-    void showUser(String message);
+    void errorMessage(String message);
 
     void enableInputs();
 
@@ -16,4 +16,5 @@ public interface LoginView {
 
     void hideProgressBar();
 
+    void navigationContactsList();
 }

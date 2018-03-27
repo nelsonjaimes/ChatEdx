@@ -1,38 +1,32 @@
 package com.jaimes.nelson.chatedx.login;
 
-import com.jaimes.nelson.chatedx.login.event.LoginEvent;
-
 import org.greenrobot.eventbus.EventBus;
 
 /**
  * @author Nelson Jaimes Gonzales on 25/03/2018.
  * @version 1.0
  * @see EventBus
- * @see LoginInteractor
+ * @see LoginRepositoryImpl
  */
 
 public class LoginInteractorImpl implements LoginInteractor {
-    private EventBus eventBus;
+    private LoginRepository loginRepository;
 
     LoginInteractorImpl() {
-        eventBus = EventBus.getDefault();
+        loginRepository = new LoginRepositoryImpl();
     }
 
     @Override
     public void checkAuthenticatedUser() {
-
+        if (loginRepository != null) {
+            loginRepository.checkAuthenticationUser();
+        }
     }
 
     @Override
-    public void sigIn(String dni, String password) {
-
+    public void signIn(String email, String password) {
+        if (loginRepository != null) {
+            loginRepository.signIn(email, password);
+        }
     }
-
-    private void event(int type, String message) {
-        LoginEvent loginEvent = new LoginEvent();
-        loginEvent.setType(type);
-        loginEvent.setMessage(message);
-        eventBus.post(loginEvent);
-    }
-
 }

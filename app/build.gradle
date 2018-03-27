@@ -38,6 +38,7 @@ dependencies {
     implementation "org.greenrobot:eventbus:$rootProject.ext.eventbusVersion"
     implementation "com.google.firebase:firebase-auth:$rootProject.ext.firebaseVersion"
     implementation "com.google.firebase:firebase-database:$rootProject.ext.firebaseVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
     testImplementation 'junit:junit:4.12'

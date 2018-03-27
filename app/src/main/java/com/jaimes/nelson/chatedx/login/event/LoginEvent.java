@@ -5,7 +5,9 @@ package com.jaimes.nelson.chatedx.login.event;
  */
 
 public class LoginEvent {
-    public static final int LOGIN_SUCCESS = 1;
+    public static final int SIGN_IN_SUCCESS = 1;
+    public static final int SIGN_IN_ERROR = 2;
+    public static final int FAILURE_RECOVERY_SESSION = 3;
     private int type;
     private String message;
 

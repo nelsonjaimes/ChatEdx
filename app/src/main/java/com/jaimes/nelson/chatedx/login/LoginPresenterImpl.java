@@ -1,5 +1,9 @@
 package com.jaimes.nelson.chatedx.login;
 
+import android.content.Context;
+import android.support.annotation.StringRes;
+
+import com.jaimes.nelson.chatedx.R;
 import com.jaimes.nelson.chatedx.login.event.LoginEvent;
 import com.jaimes.nelson.chatedx.login.ui.LoginView;
 
@@ -8,23 +12,29 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 /**
- * Created by NJG_3 on 25/03/2018.
+ * @author Nelson Jaimes Gonzales on 25/03/2018.
  */
 
 public class LoginPresenterImpl implements LoginPresenter {
     private LoginView loginView;
     private LoginInteractor loginInteractor;
     private EventBus eventBus;
+    private Context context;
 
     public LoginPresenterImpl(LoginView loginView) {
         this.loginView = loginView;
+        this.context = (Context) loginView;
         this.eventBus = EventBus.getDefault();
         this.loginInteractor = new LoginInteractorImpl();
     }
 
     @Override
-    public void signIn() {
-
+    public void signIn(String email, String password) {
+        if (loginView != null) {
+            loginView.disableInputs();
+            loginView.showProgressBar();
+        }
+        loginInteractor.signIn(email, password);
     }
 
     @Override
@@ -39,8 +49,42 @@ public class LoginPresenterImpl implements LoginPresenter {
     @Override
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(LoginEvent loginEvent) {
+        switch (loginEvent.getType()) {
+            case LoginEvent.SIGN_IN_ERROR:
+                onErrorSignIn(loginEvent.getMessage());
+                break;
+            case LoginEvent.SIGN_IN_SUCCESS:
+                onSuccessSignIn();
+                break;
+            case LoginEvent.FAILURE_RECOVERY_SESSION:
+                onFailureRecoverySession();
+                break;
+        }
+    }
+
+    private void onErrorSignIn(String message) {
         if (loginView != null) {
-            loginView.showUser(loginEvent.getMessage());
+            loginView.hideProgressBar();
+            loginView.enableInputs();
+            if (message != null) {
+                loginView.errorMessage(message);
+            } else {
+                loginView.errorMessage(getString(R.string.onSigInError));
+            }
+        }
+    }
+
+    private void onFailureRecoverySession() {
+        if (loginView != null) {
+            loginView.errorMessage(getString(R.string.onFailureRecoverySession));
+            loginView.hideProgressBar();
+            loginView.enableInputs();
+        }
+    }
+
+    private void onSuccessSignIn() {
+        if (loginView != null) {
+            loginView.navigationContactsList();
         }
     }
 
@@ -52,5 +96,10 @@ public class LoginPresenterImpl implements LoginPresenter {
     @Override
     public void onDestroy() {
         eventBus.unregister(this);
+        loginView = null;
+    }
+
+    private String getString(@StringRes int stringId) {
+        return context.getResources().getString(stringId);
     }
 }

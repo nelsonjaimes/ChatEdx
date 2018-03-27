@@ -11,7 +11,7 @@ public interface LoginPresenter {
 
     void onDestroy();
 
-    void signIn();
+    void signIn(String email, String password);
 
     void onEventMainThread(LoginEvent loginEvent);
 

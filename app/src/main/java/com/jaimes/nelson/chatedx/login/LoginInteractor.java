@@ -6,6 +6,7 @@ package com.jaimes.nelson.chatedx.login;
 
 public interface LoginInteractor {
 
-    void sigIn(String dni,String password);
     void checkAuthenticatedUser();
+
+    void signIn(String email, String password);
 }
