@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "538117105533",
+    "firebase_url": "https://chatedx-24228.firebaseio.com",
+    "project_id": "chatedx-24228",
+    "storage_bucket": "chatedx-24228.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538117105533:android:815bb31e99b234be",
+        "android_client_info": {
+          "package_name": "com.jaimes.nelson.chatedx"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538117105533-qkhknnt62tbis9plnmb2lq2d0q5oer27.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jaimes.nelson.chatedx",
+            "certificate_hash": "4f68868138bf74afb17b9a0a4d18b6b2e74b4a0d"
+          }
+        },
+        {
+          "client_id": "538117105533-v36a3sh7emo2283fuki0jv4bp0e4kc63.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKHIzyq8A8-xaVsN13IfWh0dDblPeG0mY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538117105533-v36a3sh7emo2283fuki0jv4bp0e4kc63.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

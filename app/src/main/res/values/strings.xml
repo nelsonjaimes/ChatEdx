@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ChatEdx</string>
+    <string name="onFailureRecoverySession">No se pudo recuperar la sesión</string>
+    <string name="onSigInError">No se pudo iniciar sesión</string>
+    </resources>
