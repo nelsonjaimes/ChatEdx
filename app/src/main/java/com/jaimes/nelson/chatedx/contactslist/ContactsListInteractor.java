@@ -5,4 +5,10 @@ package com.jaimes.nelson.chatedx.contactslist;
  */
 
 public interface ContactsListInteractor {
+    void subscribeEvents();
+
+    void unSubscribeEvents();
+
+    void onDestroyContactsListener();
+
 }

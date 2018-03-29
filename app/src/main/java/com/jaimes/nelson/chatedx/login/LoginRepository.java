@@ -7,5 +7,7 @@ package com.jaimes.nelson.chatedx.login;
 public interface LoginRepository {
     void checkAuthenticationUser();
 
-    void signIn(String email,String password);
+    void signIn(String email, String password);
+
+    void signUp(String email, String password);
 }

@@ -96,8 +96,12 @@ public class FirebaseHelper {
         });
     }
 
-    private void notifyChangeConnectionAllContacts(boolean online) {
+    public void notifyChangeConnectionAllContacts(boolean online) {
         notifyChangeConnectionAllContacts(online, false);
+    }
+
+    public void signOff(){
+        notifyChangeConnectionAllContacts(User.OFLINE,true);
     }
 
     public void changeUserConnectionStatus(boolean online) {

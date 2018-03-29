@@ -52,6 +52,31 @@ public class LoginRepositoryImpl implements LoginRepository {
     }
 
     @Override
+    public void signUp(final String email, final String password) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.removeAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+            }
+        });
+        firebaseAuth.createUserWithEmailAndPassword(email, password).
+                addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        event(LoginEvent.SIGN_UP_SUCCESS);
+                        signIn(email, password);
+                    }
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                event(LoginEvent.SIGN_UP_ERROR, e.getMessage());
+            }
+        });
+    }
+
+    @Override
     public void signIn(String email, String password) {
         try {
             FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();

@@ -30,11 +30,25 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     @Override
     public void signIn(String email, String password) {
+        if (email.isEmpty() || password.isEmpty()) {
+            return;
+        }
         if (loginView != null) {
             loginView.disableInputs();
             loginView.showProgressBar();
         }
         loginInteractor.signIn(email, password);
+    }
+
+    @Override
+    public void signUp(String email, String password) {
+        if (email.isEmpty() || password.isEmpty()) {
+            return;
+        }
+        if (loginView != null) {
+            loginView.disableInputs();
+            loginView.showProgressBar();
+        }
     }
 
     @Override
@@ -59,6 +73,27 @@ public class LoginPresenterImpl implements LoginPresenter {
             case LoginEvent.FAILURE_RECOVERY_SESSION:
                 onFailureRecoverySession();
                 break;
+            case LoginEvent.SIGN_UP_SUCCESS:
+                onSuccessSignUp();
+                break;
+            case LoginEvent.SIGN_UP_ERROR:
+                onErrorSignUp(loginEvent.getMessage());
+                break;
+        }
+    }
+
+    private void onSuccessSignUp() {
+        if (loginView != null) {
+            loginView.navigationContactsList();
+        }
+    }
+
+    private void onErrorSignUp(String message) {
+        if (loginView != null) {
+            loginView.hideProgressBar();
+            loginView.enableInputs();
+            if (message == null) message = getString(R.string.onSigUpError);
+            loginView.errorMessage(message);
         }
     }
 
@@ -66,11 +101,8 @@ public class LoginPresenterImpl implements LoginPresenter {
         if (loginView != null) {
             loginView.hideProgressBar();
             loginView.enableInputs();
-            if (message != null) {
-                loginView.errorMessage(message);
-            } else {
-                loginView.errorMessage(getString(R.string.onSigInError));
-            }
+            if (message == null) message = getString(R.string.onSigInError);
+            loginView.errorMessage(message);
         }
     }
 

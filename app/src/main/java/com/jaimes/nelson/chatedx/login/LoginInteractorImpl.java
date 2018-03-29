@@ -24,6 +24,13 @@ public class LoginInteractorImpl implements LoginInteractor {
     }
 
     @Override
+    public void signUp(String email, String password) {
+        if (loginRepository != null) {
+            loginRepository.signUp(email, password);
+        }
+    }
+
+    @Override
     public void signIn(String email, String password) {
         if (loginRepository != null) {
             loginRepository.signIn(email, password);

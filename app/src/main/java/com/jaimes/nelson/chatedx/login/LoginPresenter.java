@@ -13,6 +13,8 @@ public interface LoginPresenter {
 
     void signIn(String email, String password);
 
+    void signUp(String email, String password);
+
     void onEventMainThread(LoginEvent loginEvent);
 
     void checkAuthenticatedUser();

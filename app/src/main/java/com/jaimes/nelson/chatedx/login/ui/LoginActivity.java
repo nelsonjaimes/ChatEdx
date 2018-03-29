@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.jaimes.nelson.chatedx.R;
-import com.jaimes.nelson.chatedx.contactslist.ContactsListActivity;
+import com.jaimes.nelson.chatedx.contactslist.ui.ContactsListActivity;
 import com.jaimes.nelson.chatedx.login.LoginPresenter;
 import com.jaimes.nelson.chatedx.login.LoginPresenterImpl;
 
@@ -44,13 +44,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         loginPresenter.checkAuthenticatedUser();
     }
 
     @OnClick(R.id.btnSignup)
     void signUp() {
+        loginPresenter.signUp(edtEmail.getText().toString().trim(),
+                edtPassword.getText().toString().trim());
     }
 
     @OnClick(R.id.btnSignin)
@@ -86,8 +88,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void navigationContactsList() {
-        Intent intent = new Intent(LoginActivity.this, ContactsListActivity.class);
+        Intent intent = new Intent(this, ContactsListActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override

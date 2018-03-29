@@ -9,4 +9,6 @@ public interface LoginInteractor {
     void checkAuthenticatedUser();
 
     void signIn(String email, String password);
+
+    void signUp(String email, String password);
 }
